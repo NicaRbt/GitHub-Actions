@@ -2,43 +2,43 @@
 
 ## 📌 Overview
 
-GitHub Actions permite declanșarea (triggering) workflow-urilor în mai multe moduri, în funcție de evenimentele din repository sau acțiuni externe.
+GitHub Actions allows you to trigger workflows in multiple ways, depending on repository events or external actions.
 
 ---
 
 # 🔹 1. Repository Events
 
-Aceste evenimente sunt declanșate automat de acțiuni din repository.
+These events are automatically triggered by actions happening in your repository.
 
 ## 🟢 push
 
-Declanșat atunci când cineva face push în repository.
+Triggered when someone pushes code to the repository.
 
-### Exemplu:
+### Example:
 
 ```yaml
 on:
   push:
 ```
 
-### Use case:
+### Use cases:
 
-* Build automat după fiecare commit
-* Rulare teste
+* Automatically build after each commit
+* Run tests
 
 ---
 
 ## 🟢 issues
 
-Declanșat de evenimente legate de issue-uri.
+Triggered by events related to issues.
 
-### Exemple de evenimente:
+### Event types:
 
 * opened
 * closed
 * edited
 
-### Exemplu:
+### Example:
 
 ```yaml
 on:
@@ -46,24 +46,24 @@ on:
     types: [opened, closed]
 ```
 
-### Use case:
+### Use cases:
 
-* Automatizare task-uri issue
-* Notificări
+* Automate issue handling
+* Send notifications
 
 ---
 
 ## 🟢 pull_request
 
-Declanșat la evenimente legate de Pull Requests.
+Triggered by events related to pull requests.
 
-### Exemple:
+### Event types:
 
 * opened
 * synchronize
 * closed
 
-### Exemplu:
+### Example:
 
 ```yaml
 on:
@@ -71,24 +71,24 @@ on:
     types: [opened, synchronize]
 ```
 
-### Use case:
+### Use cases:
 
-* Validare cod înainte de merge
-* CI/CD pipeline
+* Validate code before merging
+* Run CI/CD pipelines
 
 ---
 
 ## 🟢 pull_request_review
 
-Declanșat la review-uri pe PR.
+Triggered by pull request review events.
 
-### Exemple:
+### Event types:
 
 * submitted
 * edited
 * dismissed
 
-### Exemplu:
+### Example:
 
 ```yaml
 on:
@@ -96,60 +96,60 @@ on:
     types: [submitted]
 ```
 
-### Use case:
+### Use cases:
 
-* Acțiuni după aprobarea codului
-* Workflow pentru code review
+* Trigger actions after approval
+* Enforce review workflows
 
 ---
 
 ## 🟢 fork
 
-Declanșat când repository-ul este fork-uit.
+Triggered when your repository is forked.
 
-### Exemplu:
+### Example:
 
 ```yaml
 on:
   fork:
 ```
 
-### Use case:
+### Use cases:
 
-* Monitorizare fork-uri
-* Analytics
+* Monitor repository forks
+* Collect analytics
 
 ---
 
 # 🔹 2. Manual Triggers
 
-Acestea permit rularea manuală sau externă a workflow-urilor.
+These allow workflows to be triggered manually or from external systems.
 
 ---
 
 ## 🟡 workflow_dispatch (UI Trigger)
 
-Permite rularea manuală din GitHub UI (Actions tab).
+Allows manual execution from the GitHub UI (Actions tab).
 
-### Exemplu:
+### Example:
 
 ```yaml
 on:
   workflow_dispatch:
 ```
 
-### Use case:
+### Use cases:
 
-* Rulare manuală deployment
-* Debugging
+* Manual deployments
+* Debugging workflows
 
 ---
 
 ## 🟡 repository_dispatch (API Trigger)
 
-Declanșat prin API GitHub.
+Triggered via GitHub API.
 
-### Exemplu:
+### Example:
 
 ```yaml
 on:
@@ -157,40 +157,40 @@ on:
     types: [custom-event]
 ```
 
-### Use case:
+### Use cases:
 
-* Integrare cu alte sisteme
-* Automatizare externă
+* Integration with external systems
+* Trigger workflows from other services
 
 ---
 
 ## 🟡 workflow_call (Triggered from another workflow)
 
-Permite apelarea unui workflow din alt workflow.
+Allows one workflow to call another.
 
-### Exemplu:
+### Example:
 
 ```yaml
 on:
   workflow_call:
 ```
 
-### Use case:
+### Use cases:
 
-* Reutilizare workflow-uri
-* Modularizare CI/CD
+* Reusable workflows
+* Modular CI/CD pipelines
 
 ---
 
 # 🔹 3. Schedule (Cron Jobs)
 
-Rulează workflow-ul la intervale definite.
+Runs workflows at defined time intervals.
 
 ## 🟠 schedule
 
-Execută job-uri pe bază de cron.
+Executes jobs based on a cron schedule.
 
-### Exemplu:
+### Example:
 
 ```yaml
 on:
@@ -198,7 +198,7 @@ on:
     - cron: "0 0 * * *"
 ```
 
-### Explicație cron:
+### Cron format:
 
 ```
 ┌───────────── minute (0 - 59)
@@ -211,36 +211,36 @@ on:
 * * * * *
 ```
 
-### Use case:
+### Use cases:
 
-* Backup zilnic
-* Job-uri recurente
-* Monitorizare
+* Daily backups
+* Scheduled jobs
+* Monitoring tasks
 
 ---
 
-# 📊 Rezumat
+# 📊 Summary
 
-| Tip Trigger      | Exemplu             | Utilizare         |
-| ---------------- | ------------------- | ----------------- |
-| Repository Event | push, PR            | CI/CD automat     |
-| Manual           | workflow_dispatch   | Rulare manuală    |
-| API              | repository_dispatch | Integrare externă |
-| Workflow         | workflow_call       | Reutilizare       |
-| Schedule         | cron                | Job-uri periodice |
+| Trigger Type     | Example             | Usage                 |
+| ---------------- | ------------------- | --------------------- |
+| Repository Event | push, PR            | Automated CI/CD       |
+| Manual           | workflow_dispatch   | Manual execution      |
+| API              | repository_dispatch | External integrations |
+| Workflow         | workflow_call       | Reusability           |
+| Schedule         | cron                | Periodic jobs         |
 
 ---
 
 # ✅ Best Practices
 
-* 🔹 Folosește `push` + `pull_request` pentru CI complet
-* 🔹 Adaugă `workflow_dispatch` pentru debugging
-* 🔹 Utilizează `workflow_call` pentru DRY (Don't Repeat Yourself)
-* 🔹 Evită rulările inutile (filtre pe branch-uri)
+* 🔹 Use `push` + `pull_request` for full CI coverage
+* 🔹 Add `workflow_dispatch` for debugging
+* 🔹 Use `workflow_call` to avoid duplication (DRY principle)
+* 🔹 Limit unnecessary runs (use branch filters)
 
 ---
 
-# 🎯 Exemplu complet
+# 🎯 Complete Example
 
 ```yaml
 name: CI Pipeline
@@ -262,13 +262,13 @@ jobs:
 
 ---
 
-# 📚 Concluzie
+# 📚 Conclusion
 
-GitHub Actions oferă flexibilitate mare prin multiple tipuri de trigger:
+GitHub Actions provides great flexibility through multiple trigger types:
 
-* automate (push, PR)
-* manuale
-* programate
-* externe
+* Automated (push, pull_request)
+* Manual
+* Scheduled
+* External
 
-Alegerea corectă depinde de nevoile pipeline-ului tău.
+Choosing the right trigger depends on your pipeline requirements.
